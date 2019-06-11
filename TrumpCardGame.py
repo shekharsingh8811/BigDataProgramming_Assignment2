@@ -35,7 +35,7 @@ while len(trumpcards) > 0:
     player2Deck.append(trumpcards.pop(0))
 
 ## rolling dices to check who starts first ##
-print("Card game between two entities: Player 1 and Player 2.")
+print("Card game between two entities: Player1 and Player2.")
 print("Cards will be distributed equally among both players face down such that players cannot see the characters they have been given.")
 print("Each player gets two special spells (God and Resurrect) which can only be used once by each player.")
 startGame = input("Would you like to start the card game? Please enter 'yes' or 'no' to proceed.")
@@ -52,13 +52,13 @@ def rollDice():
         print("Player2 won the dice roll and will start first!")
         playerTurn = False
     else:
-        print("It's a tie. Roll again!")
+        print("It's a tie. Rolling again!")
         rollDice()
     
-if (startGame == "yes" or startGame == 'YES'):
+if (startGame == "yes" or startGame == "YES"):
     print("Game begins, rolling the dice!")
     rollDice()
-elif (startGame == "no" or startGame == 'NO'):
+elif (startGame == "no" or startGame == "NO"):
     print("Goodbye, please come again!")
     raise SystemExit
 else:
@@ -75,8 +75,8 @@ resurrectSpellPlayer1 = 0
 resurrectSpellPlayer2 = 0
 player1Points = 0
 player2Points = 0
-rspell = "no"
-rspell1 = "no"
+resurrectSpell1 = "no"
+resurrectSpell2 = "no"
 
 while len(player1Deck) > 0 and len(player2Deck) > 0:
     
@@ -86,8 +86,8 @@ while len(player1Deck) > 0 and len(player2Deck) > 0:
         ## Resurrect Spell for Player1 ##
         ra = 0
         if (resurrectSpellPlayer1 == 0 and len(outdatedDeck) > 1 and ra == 0):
-            rspell = input("Player1, would you like to play Resurrect Spell? Please answer: ‘yes’ or ‘no’")
-            if (rspell == "yes" and resurrectSpellPlayer1 == 0):
+            resurrectSpell1 = input("Player1, would you like to play Resurrect Spell? Please answer: 'yes' or 'no'")
+            if (resurrectSpell1 == "yes" and resurrectSpellPlayer1 == 0):
                 z1 = random.randint(1,len(outdatedDeck))
                 player1Card = outdatedDeck.pop(int(z1)-1)
                 outdatedDeck.append(player1Card)
@@ -96,7 +96,6 @@ while len(player1Deck) > 0 and len(player2Deck) > 0:
             else:
                 player1Card = player1Deck.pop(0)
                 outdatedDeck.append(player1Card)
-
         else:
             player1Card = player1Deck.pop(0)
             outdatedDeck.append(player1Card)
@@ -110,24 +109,25 @@ while len(player1Deck) > 0 and len(player2Deck) > 0:
         print("d. Biceps:", player1Card.biceps)
         print("e. Rank:", player1Card.rank)
         answer = input("Player1, which characteristic would you choose?")
+        print("Player1 chooses", answer)
         
         while acceptedResponses.count(answer) == 0:
-            answer = input("That isn't a valid input, please try again: ")
-        #player1 god spell
+            answer = input("That isn't a valid input, please try again:")
+        ## God Spell for Player1 ##
         if (godSpellPlayer1 == 0  and len(player2Deck) > 1 and ra == 0):
-            gspell = input("Player1, would you like to play God Spell? Please answer: ‘yes’ or ‘no’")
-            if (gspell == "yes" and godSpellPlayer1 == 0):
+            godSpell1 = input("Player1, would you like to play God Spell? Please answer: 'yes' or 'no'")
+            if (godSpell1 == "yes" and godSpellPlayer1 == 0):
                 godSpellPlayer1 = 1
                 lec = len(player2Deck)
                 print("No of cards in Player2’s deck:", lec)
                 cardno = input("Which card should Player2 play with?")
                 if (resurrectSpellPlayer2 == 0 and len(outdatedDeck) > 1):
-                    rspell1 = input("Player2, would you like to play Resurrect Spell? Please answer: ‘yes’ or ‘no’")
-                    if (rspell1 == "yes" and resurrectSpellPlayer2 == 0):
+                    resurrectSpell2 = input("Player2, would you like to play Resurrect Spell? Please answer: 'yes' or 'no'")
+                    if (resurrectSpell2 == "yes" and resurrectSpellPlayer2 == 0):
                         z2 = random.randint(1,len(outdatedDeck))
                         mn = outdatedDeck.pop(int(z2)-1)
                         player2Deck.insert(0,mn)
-                        choice = input("Player1: a. Force resurrected card or b. Force earlier choice ")
+                        choice = input("Player1: a. Force resurrected card or b. Force earlier choice")
                         if (choice == "a"):
                             player2Card = player2Deck.pop(0)
                             outdatedDeck.append(player2Card)
@@ -162,8 +162,8 @@ while len(player1Deck) > 0 and len(player2Deck) > 0:
         ## Resurrect Spell for Player2 ##
         rb = 0
         if (resurrectSpellPlayer2 == 0 and len(outdatedDeck) > 1 and rb == 0):
-            rspell1 = input("Player2, would you like to play Resurrect Spell? Please answer: ‘yes’ or ‘no’")
-            if (rspell1 == "yes" and resurrectSpellPlayer2 == 0):
+            resurrectSpell2 = input("Player2, would you like to play Resurrect Spell? Please answer: 'yes' or 'no'")
+            if (resurrectSpell2 == "yes" and resurrectSpellPlayer2 == 0):
                 z2 = random.randint(1,len(outdatedDeck))
                 player2Card = outdatedDeck.pop(int(z2)-1)
                 outdatedDeck.append(player2Card)
@@ -172,7 +172,6 @@ while len(player1Deck) > 0 and len(player2Deck) > 0:
             else:
                 player2Card = player2Deck.pop(0)
                 outdatedDeck.append(player2Card)
-
         else:
             player2Card = player2Deck.pop(0)
             outdatedDeck.append(player2Card)
@@ -185,25 +184,24 @@ while len(player1Deck) > 0 and len(player2Deck) > 0:
         print("c. Chest:", player2Card.chest)
         print("d. Biceps:", player2Card.biceps)
         print("e. Rank:", player2Card.rank)
-        
-        answer = input("Player2, which characteristic would you choose? ")
+        answer = input("Player2, which characteristic would you choose?")
         print("Player2 chooses", answer)
         
-        #Player2 god spell
+        ## God Spell for Player2 ##
         if (godSpellPlayer2 == 0 and len(player1Deck) > 1 and rb == 0):
-            gspell1 = input("Player2, would you like to play God Spell? Please answer: ‘yes’ or ‘no’")
-            if (gspell1 == "yes" and godSpellPlayer2 == 0):
+            godSpell2 = input("Player2, would you like to play God Spell? Please answer: 'yes' or 'no'")
+            if (godSpell2 == "yes" and godSpellPlayer2 == 0):
                 godSpellPlayer2 = 1
                 lep = len(player1Deck)
                 print("No of cards in Player1’s deck:", lep)
                 cardno1 = input("Which card should Player1 play with? ")
                 if (resurrectSpellPlayer1 == 0 and len(outdatedDeck) > 1):
-                    rspell = input("Player1, would you like to play Resurrect Spell? Please answer: ‘yes’ or ‘no’")
-                    if (rspell == "yes" and resurrectSpellPlayer1 == 0):
+                    resurrectSpell1 = input("Player1, would you like to play Resurrect Spell? Please answer: 'yes' or 'no'")
+                    if (resurrectSpell1 == "yes" and resurrectSpellPlayer1 == 0):
                         z1 = random.randint(1,len(outdatedDeck))
                         nm = outdatedDeck.pop(int(z1)-1)
                         player1Deck.insert(0,nm)
-                        choice1 = input("Player2: a. Force resurrected card or b. Force earlier choice ")
+                        choice1 = input("Player2: a. Force resurrected card or b. Force earlier choice")
                         if (choice1 == "a"):
                             player1Card = player1Deck.pop(0)
                             outdatedDeck.append(player1Card)
@@ -221,8 +219,6 @@ while len(player1Deck) > 0 and len(player2Deck) > 0:
             else:
                 player1Card = player1Deck.pop(0)
                 outdatedDeck.append(player1Card)
-
-        
         else:
             player1Card = player1Deck.pop(0)
             outdatedDeck.append(player1Card)
@@ -237,7 +233,7 @@ while len(player1Deck) > 0 and len(player2Deck) > 0:
     
     
     playerWins = False
-    #comparing cards of player1 and player2
+    ## comparing cards of Player1 and Player2 ##
     if answer == "a":
         playerWins = (player1Card.height > player2Card.height)
     elif answer == "b":
@@ -267,7 +263,7 @@ time.sleep(2)
 if player1Points<player2Points:
     print("Player2 is the winner of this game!")
 elif player1Points>player2Points:
-    print("Player1’s is the winner of this game!")
+    print("Player1 is the winner of this game!")
 else:
     print("The game ended in a tie!")
  
